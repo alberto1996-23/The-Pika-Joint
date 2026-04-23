@@ -5,21 +5,55 @@ body {
   color: #222;
 }
 
-main {
-  text-align: center;
-  padding: 3rem;
+.app-container {
+  min-height: 100vh;
 }
 
-h1 {
+.site-header {
+  text-align: center;
+  padding: 2rem;
+  background-color: #ffde59;
+}
+
+.site-header h1 {
+  margin: 0;
+}
+
+.site-header p {
+  margin-top: 0.5rem;
+}
+
+main {
+  padding: 2rem;
+}
+
+.menu-category {
+  margin-bottom: 2.5rem;
+}
+
+.menu-category h2 {
   margin-bottom: 1rem;
 }
 
-p {
-  margin-bottom: 1.5rem;
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
 }
 
-button {
-  padding: 0.75rem 1.25rem;
-  font-size: 1rem;
-  cursor: pointer;
+.menu-item-card {
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.menu-item-card h3 {
+  margin-top: 0;
+}
+
+.menu-item-card span {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-weight: bold;
 }
