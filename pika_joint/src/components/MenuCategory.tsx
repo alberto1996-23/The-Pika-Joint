@@ -4,9 +4,10 @@ import type { MenuItem } from '../data/MenuData'
 type MenuCategoryProps = {
   title: string
   items: MenuItem[]
+  onAddToOrder: (item: MenuItem) => void
 }
 
-function MenuCategory({ title, items }: MenuCategoryProps) {
+function MenuCategory({ title, items, onAddToOrder }: MenuCategoryProps) {
   return (
     <section className="menu-category">
       <h2>{title}</h2>
@@ -17,6 +18,7 @@ function MenuCategory({ title, items }: MenuCategoryProps) {
             name={item.name}
             description={item.description}
             price={item.price}
+            onAddToOrder={() => onAddToOrder(item)}
           />
         ))}
       </div>
