@@ -13,6 +13,8 @@ type OrderItem = {
 
 function App() {
   const [orderItems, setOrderItems] = useState<OrderItem[]>([])
+  const [orderType, setOrderType] = useState('Dine-In')
+  const [submitted, setSubmitted] = useState(false)
 
   const breakfastItems = menuItems.filter((item) => item.category === 'Breakfast')
   const lunchItems = menuItems.filter((item) => item.category === 'Lunch')
@@ -20,6 +22,8 @@ function App() {
   const dessertItems = menuItems.filter((item) => item.category === 'Dessert')
 
   function handleAddToOrder(item: MenuItem) {
+    setSubmitted(false)
+
     setOrderItems((prevItems) => {
       const existingItem = prevItems.find((orderItem) => orderItem.name === item.name)
 
@@ -36,6 +40,8 @@ function App() {
   }
 
   function handleIncrease(name: string) {
+    setSubmitted(false)
+
     setOrderItems((prevItems) =>
       prevItems.map((item) =>
         item.name === name ? { ...item, quantity: item.quantity + 1 } : item
@@ -44,6 +50,8 @@ function App() {
   }
 
   function handleDecrease(name: string) {
+    setSubmitted(false)
+
     setOrderItems((prevItems) =>
       prevItems
         .map((item) =>
@@ -52,6 +60,28 @@ function App() {
         .filter((item) => item.quantity > 0)
     )
   }
+
+  function handleOrderTypeChange(type: string) {
+    setSubmitted(false)
+    setOrderType(type)
+  }
+
+  function handleSubmitOrder() {
+    if (orderItems.length === 0) {
+      return
+    }
+
+    setSubmitted(true)
+  }
+
+  function parsePrice(price: string): number {
+    const firstPrice = price.replace('$', '').split(' - ')[0]
+    return Number(firstPrice)
+  }
+
+  const total = orderItems.reduce((sum, item) => {
+    return sum + parsePrice(item.price) * item.quantity
+  }, 0)
 
   return (
     <div className="app-container">
@@ -67,8 +97,13 @@ function App() {
 
         <OrderPanel
           orderItems={orderItems}
+          orderType={orderType}
+          total={total}
+          submitted={submitted}
           onIncrease={handleIncrease}
           onDecrease={handleDecrease}
+          onOrderTypeChange={handleOrderTypeChange}
+          onSubmitOrder={handleSubmitOrder}
         />
       </div>
     </div>

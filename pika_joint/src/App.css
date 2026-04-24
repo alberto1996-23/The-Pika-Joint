@@ -93,3 +93,29 @@ main {
   padding: 0.4rem 0.8rem;
   cursor: pointer;
 }
+
+.order-type-section {
+  margin-top: 1.5rem;
+}
+
+.order-type-section select {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.order-summary {
+  margin-top: 1.5rem;
+}
+
+.order-summary button {
+  margin-top: 0.75rem;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+}
+
+.confirmation-message {
+  margin-top: 1rem;
+  font-weight: bold;
+  color: green;
+}
