@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import Header from './components/header'
+import Header from './components/Header'
 import MenuCategory from './components/MenuCategory'
 import OrderPanel from './components/OrderPanel'
 import { menuItems, type MenuItem } from './data/MenuData'
