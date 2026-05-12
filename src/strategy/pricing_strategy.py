@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
-from ../order import Order
 
-class PricingStrategy:
-    def calculate_total(order: Order) -> double:
+class PricingStrategy(ABC):
+    @abstractmethod
+    def calculate_total(self, order: Order) -> float:
+        pass
         

@@ -1,4 +1,6 @@
 from order_item import OrderItem
+from strategy.pricing_strategy import PricingStrategy
+from strategy.dine_in_strategy import DineInStrategy
 
 
 class Order:
@@ -7,6 +9,7 @@ class Order:
         self.order_type = order_type
         self.items: list[OrderItem] = []
         self.status = status
+        self.pricing_strategy: PricingStrategy = DineInStrategy()
 
     def add_item(self, item: OrderItem) -> None:
         self.items.append(item)
@@ -15,11 +18,11 @@ class Order:
         if item in self.items:
             self.items.remove(item)
 
+    def set_pricing_strategy(self, strategy: PricingStrategy) -> None:
+        self.pricing_strategy = strategy
+
     def calculate_total(self) -> float:
-        total = 0.0
-        for item in self.items:
-            total += item.get_subtotal()
-        return total
+        return self.pricing_strategy.calculate_total(self)
 
     def submit_order(self) -> None:
         self.status = "Submitted"
