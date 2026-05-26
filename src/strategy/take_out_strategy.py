@@ -1,8 +1,9 @@
 from strategy.pricing_strategy import PricingStrategy
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from order import Order
 
 class TakeOutStrategy(PricingStrategy):
-    def calculate_total(self, order: Order) -> float:
-        total = 0.0
-        for item in order.items:
-            total += item.get_subtotal()
-        return total
+    def calculate_total(self, order: "Order") -> float:
+        return sum(item.get_subtotal() for item in order.items)

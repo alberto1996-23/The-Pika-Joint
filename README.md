@@ -29,3 +29,6 @@
 
 7. Where is the entry point to your project?
 	SE-350Project/src
+
+FINAL SUBMISSION:
+For the final submission, I am demonstrating a working Pokémon-themed restaurant system where users can view menu items, build an order, choose dine-in/takeout/delivery, calculate totals, submit orders, and move orders through the restaurant workflow using the implemented design patterns.

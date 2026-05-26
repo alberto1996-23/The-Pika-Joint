@@ -1,29 +1,33 @@
+from menu import Menu
+from kitchen import Kitchen
+from restaurant_system import RestaurantSystem
 from menu_item import MenuItem
 from order_item import OrderItem
 from order import Order
-from strategy.dine_in_strategy import DineInStrategy
-from strategy.take_out_strategy import TakeOutStrategy
-from strategy.delivery_strategy import DeliveryStrategy
 
 
 def main():
+    menu = Menu()
+    kitchen = Kitchen()
+    restaurant_system = RestaurantSystem(menu, kitchen)
+
     burger = MenuItem("Pika Patty", "Burger with toppings", "Lunch", 5.00)
     fries = MenuItem("Fries", "Crispy fries", "Side", 2.00)
 
-    order = Order(1, "Delivery")
+    menu.add_item(burger)
+    menu.add_item(fries)
+
+    order = Order(1, "Dine-In")
     order.add_item(OrderItem(burger, 2))
     order.add_item(OrderItem(fries, 1))
 
-    order.set_pricing_strategy(DeliveryStrategy())
+    restaurant_system.place_order(order)
+    restaurant_system.send_to_kitchen(order)
+
     print(order)
-
-    order.set_pricing_strategy(DineInStrategy())
-    print("\nDine-In Total:")
-    print(f"${order.calculate_total():.2f}")
-
-    order.set_pricing_strategy(TakeOutStrategy())
-    print("\nTakeout Total:")
-    print(f"${order.calculate_total():.2f}")
+    print("\nKitchen Orders:")
+    for kitchen_order in kitchen.get_active_orders():
+        print(f"Order {kitchen_order.order_id} - {kitchen_order.status}")
 
 
 if __name__ == "__main__":

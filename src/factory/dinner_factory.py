@@ -1,9 +1,9 @@
 from typing import List
 from menu_item import MenuItem
-from factory.menu_factory import MenuFactory
+from factory.menu_factory import MenuCategoryFactory
 
 
-class DinnerFactory(MenuFactory):
+class DinnerFactory(MenuCategoryFactory):
     def create_items(self) -> List[MenuItem]:
         return [
             MenuItem(
